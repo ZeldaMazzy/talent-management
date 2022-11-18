@@ -9,8 +9,6 @@ export class ErrorHandlingService {
 
   errorMessage = new Subject<Error>();
 
-  constructor() { }
-
   httpErrorHandle(statusCode: number, dataType: string): void {
 
     let msg: string = '';
@@ -23,10 +21,10 @@ export class ErrorHandlingService {
         msg = `The ${dataType} you requested could not be found. Are you sure you searched for the right one?`
         break;
       case 500:
-        msg = 'Bad request. Please try again.'
+        msg = 'Internal server error. Please try again later.'
         break;
       default:
-        msg = 'Internal server error. Please try again later.'
+        msg = 'Something went wrong. Please try again later.'
     }
     this.errorMessage.next({
       code: statusCode,
